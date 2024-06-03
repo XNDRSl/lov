@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пропозиція</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            background-image: url('https://i.pinimg.com/originals/9a/c2/f5/9ac2f59e1c8600b0762b24470f7b8407.jpg'); /* Замініть URL на фонове зображення */
+            background-size: cover;
+            background-position: center;
+            transition: background-color 0.5s;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Напівпрозорий білий фон */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            transition: opacity 0.5s;
+        }
+        h1 {
+            color: #ff69b4; /* Рожевий колір для заголовка */
+            font-size: 26px;
+            margin-bottom: 20px;
+            transition: color 0.5s;
+        }
+        .button {
+            display: block;
+            width: calc(50% - 10px);
+            padding: 15px;
+            margin: 10px 5px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 25px; /* Закруглені краї */
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, opacity 0.3s, transform 0.3s;
+        }
+        .button.no {
+            background-color: #dc3545;
+        }
+        .button:hover {
+            opacity: 0.9;
+            transform: translateY(-5px); /* Підняти кнопку при наведенні */
+        }
+        .button.no:hover {
+            opacity: 0.9;
+            transform: translateY(-5px); /* Підняти кнопку при наведенні */
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            transition: opacity 0.5s;
+        }
+        .hide {
+            display: none;
+            transition: opacity 0.5s;
+        }
+        #catContainer {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        #catContainer img {
+            width: 250px;
+            height: 250px; /* Змінено на квадратний розмір */
+            height: 200px; /* Заповнення контейнера */
+            width: 250px;
+        }
+        #loveText {
+            position: relative;
+            font-size: 40px;
+            color: #ff69b4;
+            font-family: 'Arial', Times, serif;
+            transition: color 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Контейнер з пропозицією та кнопками -->
+    <div class="container" id="proposalContainer">
+        <h1>Ти будеш моєю дружиною?</h1>
+        <div class="button-container">
+            <a href="#" class="button" id="yesButton">Так</a>
+            <a href="#" class="button no" id="noButton">Ні</a>
+        </div>
+    </div>
+    <!-- Контейнер з котиком і текстом "Я тебе люблю!" (початково прихований) -->
+    <div class="container hide" id="catContainer">
+        <img src="heart-love.gif" alt="Котик">
+        <div id="loveText" class="hide">Я тебе люблю!</div>
+    </div>
+    <!-- JavaScript скрипт -->
+    <script>
+        // Прослуховувач подій для кнопки "Так"
+        document.getElementById('yesButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            // Зникає контейнер з пропозицією та кнопками
+            var proposalContainer = document.getElementById('proposalContainer');
+            proposalContainer.style.opacity = '0';
+            setTimeout(() => proposalContainer.classList.add('hide'), 500);
+
+            // З'являється контейнер з котиком та текстом
+            var catContainer = document.getElementById('catContainer');
+            setTimeout(() => {
+                catContainer.classList.remove('hide');
+                catContainer.style.opacity = '1';
+                var loveText = document.getElementById('loveText');
+                loveText.classList.remove('hide');
+            }, 1000);
+        });
+
+        // Прослуховувач подій для кнопки "Ні"
+        document.getElementById('noButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            // Змінюється текст кнопки на "×" та зникає
+            this.textContent = '×';
+            this.style.transition = 'opacity 0.5s';
+            this.style.opacity = '0';
+            setTimeout(() => this.style.display = 'none', 500);
+        });
+    </script>
+</body>
+</html>
